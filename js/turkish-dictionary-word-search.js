@@ -31,6 +31,28 @@ document.getElementById('wordSearch').addEventListener('submit', function (event
                         }
                     }
                 }
+            } else {
+                if (wordTags.includes("IS_B_SI")){
+                    display = wordName.substring(0, wordName.length - 2) + "(" + wordName.substring(wordName.length - 2) + "):";
+                } else {
+                    if (wordTags.includes("IS_B_SD")){
+                        if (wordName.substring(0, wordName.length - 1).endsWith("ğ")){
+                            display = wordName.substring(0, wordName.length - 2) + "k(" + wordName.substring(wordName.length - 2) + "):";
+                        } else {
+                            if (wordName.substring(0, wordName.length - 1).endsWith("c")){
+                                display = wordName.substring(0, wordName.length - 2) + "ç(" + wordName.substring(wordName.length - 2) + "):";
+                            } else {
+                                if (wordName.substring(0, wordName.length - 1).endsWith("b")){
+                                    display = wordName.substring(0, wordName.length - 2) + "p(" + wordName.substring(wordName.length - 2) + "):";
+                                } else {
+                                    if (wordName.substring(0, wordName.length - 1).endsWith("d")){
+                                        display = wordName.substring(0, wordName.length - 2) + "t(" + wordName.substring(wordName.length - 2) + "):";
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
             if (wordTags.includes("IS_ST")){
                 display = wordName + "(" + wordName.at(wordName.length - 1) + wordName.at(wordName.length - 1) + "ı):"
@@ -56,6 +78,10 @@ document.getElementById('wordSearch').addEventListener('submit', function (event
             }
             if (wordTags.includes("IS_BILEŞ")) {
                 display = firstTime ? display + " Bileşik İsim" : display + ", Bileşik İsim";
+                firstTime = false
+            }
+            if (wordTags.includes("IS_KIS")) {
+                display = firstTime ? display + " Kısaltma" : display + ", Kısaltma";
                 firstTime = false
             }
             if (wordTags.includes("CL_FIIL")) {
@@ -86,9 +112,13 @@ document.getElementById('wordSearch').addEventListener('submit', function (event
                 display = firstTime ? display + " Bağlaç" : display + ", Bağlaç";
                 firstTime = false
             }
-            document.getElementById("result").textContent = display;
+            if (wordTags.includes("IS_UU")) {
+                display = display + "<p> Bu kelime ünlü uyumuna uymaz </p>";
+                firstTime = false
+            }
+            document.getElementById("result").innerHTML = display;
             return;
         }
     }
-    document.getElementById("result").textContent = "Bu kelime sözlükte yok";
+    document.getElementById("result").innerHTML = "Bu kelime sözlükte yok";
 });
