@@ -5,16 +5,18 @@
     <title>English PropBank</title>
 </head>
 <body>
-<form>
+<form id="predicateSeaarch">
     <label for="predicate_name">Predicate:</label>
     <input type="text" id="predicate_name" name="predicate_name" required><br><br>
     <input type="submit" value="Find Predicate">
     <br>
 </form>
-<form>
+<form id="roleSetSearch">
     <label for="roleset_id">Roleset Id:</label>
     <input type="text" id="roleset_id" name="roleset_id" required><br><br>
     <input type="submit" value="Find Roleset">
 </form>
+<p id="result"></p>
+<script src="js/english-propbank-search.js"></script>
 </body>
 </html>
