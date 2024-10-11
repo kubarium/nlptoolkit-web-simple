@@ -5,16 +5,18 @@
     <title>Turkish PropBank</title>
 </head>
 <body>
-<form>
+<form id="verbSearch">
     <label for="verb_name">Verb:</label>
     <input type="text" id="verb_name" name="verb_name" required><br><br>
     <input type="submit" value="Find Verb">
 </form>
 <br>
-<form>
+<form id="idSearch">
     <label for="verb_id">Verb SynSet Id:</label>
     <input type="text" id="verb_id" name="verb_id" required><br><br>
     <input type="submit" value="Find Verb">
 </form>
+<p id="result"></p>
+<script src="js/turkish-propbank-search.js"></script>
 </body>
 </html>
