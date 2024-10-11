@@ -8,9 +8,7 @@ function include(file) {
 
 include('../data/english-propbank.js');
 
-document.getElementById('predicateSeaarch').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const predicateName = document.getElementById('predicate_name').value;
+function createPredicateTable(predicateName){
     let display = "<table> <tr> <th>Id</th> <th>Name</th> <th>Descr</th> <th>f</th> <th>n</th> </tr>";
     for (let i = 0; i < englishPropBank.length; i++) {
         let frame = englishPropBank[i];
@@ -26,12 +24,10 @@ document.getElementById('predicateSeaarch').addEventListener('submit', function 
         }
     }
     display = display + "</table>"
-    document.getElementById("result").innerHTML = display;
-})
+    return display
+}
 
-document.getElementById('roleSetSearch').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const roleSetName = document.getElementById('roleset_id').value;
+function createRoleSetTable(roleSetName){
     let display = "<table> <tr> <th>Descr</th> <th>f</th> <th>n</th> </tr>";
     for (let i = 0; i < englishPropBank.length; i++) {
         let frame = englishPropBank[i];
@@ -47,5 +43,17 @@ document.getElementById('roleSetSearch').addEventListener('submit', function (ev
         }
     }
     display = display + "</table>"
-    document.getElementById("result").innerHTML = display;
+    return display
+}
+
+document.getElementById('predicateSeaarch').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const predicateName = document.getElementById('predicate_name').value;
+    document.getElementById("result").innerHTML = createPredicateTable(predicateName);
+})
+
+document.getElementById('roleSetSearch').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const roleSetName = document.getElementById('roleset_id').value;
+    document.getElementById("result").innerHTML = createRoleSetTable(roleSetName);
 })

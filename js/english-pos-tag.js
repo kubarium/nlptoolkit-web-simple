@@ -8,9 +8,7 @@ function include(file) {
 
 include('../data/english-tags.js');
 
-document.getElementById('posTag').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const sentence = document.getElementById('sentence').value;
+function createPosTableForSentence(sentence){
     let words = sentence.toLowerCase().split(' ');
     let display = "<table> <tr> <th>Word</th> <th>Tag(s)</th> </tr>";
     for (let word of words) {
@@ -32,5 +30,11 @@ document.getElementById('posTag').addEventListener('submit', function (event) {
         display = display + "</tr>"
     }
     display = display + "</table>"
-    document.getElementById("result").innerHTML = display;
+    return display
+}
+
+document.getElementById('posTag').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const sentence = document.getElementById('sentence').value;
+    document.getElementById("result").innerHTML = createPosTableForSentence(sentence);
 })

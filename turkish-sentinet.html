@@ -5,16 +5,18 @@
     <title>Turkish SentiNet</title>
 </head>
 <body>
-<form>
+<form id="wordSearch">
     <label for="word">Word:</label>
     <input type="text" id="word" name="word" required><br><br>
     <input type="submit" value="Find Word Sense">
 </form>
 <br>
-<form>
+<form id="idSearch">
     <label for="synset_id">SynSet Id:</label>
     <input type="text" id="synset_id" name="synset_id" required><br><br>
     <input type="submit" value="Find Sense">
 </form>
+<p id="result"></p>
+<script src="js/turkish-sentinet-search.js"></script>
 </body>
 </html>

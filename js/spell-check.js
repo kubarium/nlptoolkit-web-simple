@@ -8,9 +8,7 @@ function include(file) {
 
 include('../data/spell-dictionary.js');
 
-document.getElementById('spellCheck').addEventListener('submit', function (event) {
-    event.preventDefault();
-    const sentence = document.getElementById('sentence').value;
+function createSpellCheckTable(sentence){
     let words = sentence.toLowerCase().split(' ');
     let display = "<table> <tr> <th>Word</th> <th>Correct</th> </tr>";
     for (let word of words) {
@@ -32,5 +30,11 @@ document.getElementById('spellCheck').addEventListener('submit', function (event
         display = display + "</tr>"
     }
     display = display + "</table>"
-    document.getElementById("result").innerHTML = display;
+    return display
+}
+
+document.getElementById('spellCheck').addEventListener('submit', function (event) {
+    event.preventDefault();
+    const sentence = document.getElementById('sentence').value;
+    document.getElementById("result").innerHTML = createSpellCheckTable(sentence);
 })
