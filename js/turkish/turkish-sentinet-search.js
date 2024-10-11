@@ -6,8 +6,8 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish-sentinet.js');
-include('../data/turkish-sentiliteralnet.js');
+include('../data/turkish/turkish-sentinet.js');
+include('../data/turkish/turkish-sentiliteralnet.js');
 
 function displaySentiment(sentiNetObject){
     if (sentiNetObject["pscore"] > sentiNetObject["nscore"]){
@@ -38,7 +38,7 @@ document.getElementById('idSearch').addEventListener('submit', function (event) 
     const synsetId = document.getElementById('synset_id').value;
     for (let i = 0; i < turkishSentiNet.length; i++) {
         const sentiNetObject = turkishSentiNet[i];
-        if (turkishSentiNet["id"] === synsetId) {
+        if (sentiNetObject["id"] === synsetId) {
             document.getElementById("result").innerHTML = displaySentiment(sentiNetObject);
             break;
         }

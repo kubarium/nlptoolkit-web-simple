@@ -6,7 +6,7 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/english-tags.js');
+include('../data/english/english-tags.js');
 
 function createPosTableForSentence(sentence){
     let words = sentence.toLowerCase().split(' ');

@@ -6,23 +6,23 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish-wordnet.js');
+include('../data/english/english-wordnet.js');
 include('../js/wordnet-search.js');
 
 document.getElementById('wordSearch').addEventListener('submit', function (event) {
     event.preventDefault();
     const word = document.getElementById('word').value;
-    document.getElementById("result").innerHTML = createTableForWordSearch(word, turkishWordNet);
+    document.getElementById("result").innerHTML = createTableForWordSearch(word, englishWordNet);
 })
 
 document.getElementById('synonymSearch').addEventListener('submit', function (event) {
     event.preventDefault();
     const synonymWord = document.getElementById('synonymWord').value;
-    document.getElementById("result").innerHTML = createTableForSynonymSearch(synonymWord, turkishWordNet);
+    document.getElementById("result").innerHTML = createTableForSynonymSearch(synonymWord, englishWordNet);
 })
 
 document.getElementById('idSearch').addEventListener('submit', function (event) {
     event.preventDefault();
     const synsetId = document.getElementById('synset_id').value;
-    document.getElementById("result").innerHTML = createTableForIdSearch(synsetId, turkishWordNet);
+    document.getElementById("result").innerHTML = createTableForIdSearch(synsetId, englishWordNet);
 })

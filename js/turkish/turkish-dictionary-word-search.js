@@ -6,7 +6,7 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish-dictionary.js');
+include('../data/turkish/turkish-dictionary.js');
 
 document.getElementById('wordSearch').addEventListener('submit', function (event) {
     event.preventDefault();

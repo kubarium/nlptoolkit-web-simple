@@ -10,7 +10,6 @@ function createSynonym(display, j, words) {
             t++;
         }
     }
-    display = display + "</td></tr>"
     return display
 }
 
@@ -28,14 +27,23 @@ function getSynsetsWithWord(word, wordNet) {
     return result
 }
 
-function getSynsetWithId(id, wordNet){
+function getSynsetWithIdLinearSearch(id, wordNet){
+    for (let i = 0; i < wordNet.length; i++) {
+        if (wordNet[i]["id"].localeCompare(id) === 0){
+            return wordNet[i];
+        }
+    }
+    return null;
+}
+
+function getSynsetWithIdBinarySearch(id, wordNet){
     let low = 0, high = wordNet.length - 1;
-    while (low < high) {
+    while (low <= high) {
         let middle = Math.floor((low + high) / 2)
-        if (wordNet[middle]["id"] === id){
+        if (wordNet[middle]["id"].localeCompare(id) === 0){
             return wordNet[middle]
         } else {
-            if (wordNet[middle]["id"] < id){
+            if (wordNet[middle]["id"].localeCompare(id) === -1){
                 low = middle + 1
             } else {
                 high = middle - 1
@@ -52,7 +60,7 @@ function createTableForWordSearch(word, wordNet) {
         for (let j = 0; j < synset["words"].length; j++) {
             if (synset["words"][j] === word) {
                 display = display + "<tr><td>" + synset["id"] + "</td><td>" + synset["pos"] + "</td><td>" + synset["definition"] + "</td><td>"
-                display = createSynonym(display, j, synset["words"])
+                display = createSynonym(display, j, synset["words"]) + "</td></tr>"
                 break;
             }
         }
@@ -69,7 +77,7 @@ function createTableForSynonymSearch(synonymWord, wordNet) {
             for (let j = 0; j < synset["words"].length; j++) {
                 if (synset["words"][j] === synonymWord) {
                     display = display + "<tr><td>";
-                    display = createSynonym(display, j, synset["words"])
+                    display = createSynonym(display, j, synset["words"]) + "</td></tr>"
                     break;
                 }
             }
@@ -81,10 +89,10 @@ function createTableForSynonymSearch(synonymWord, wordNet) {
 
 function createTableForIdSearch(synsetId, wordNet) {
     let display = "<table> <tr> <th>Pos</th> <th>Definition</th> <th>Synonyms</th> </tr>";
-    let synset = getSynsetWithId(synsetId, wordNet);
+    let synset = getSynsetWithIdBinarySearch(synsetId, wordNet);
     if (synset != null){
         display = display + "<tr><td>" + synset["pos"] + "</td><td>" + synset["definition"] + "</td><td>";
-        display = createSynonym(display, -1, synset["words"])
+        display = createSynonym(display, -1, synset["words"]) + "</td></tr>"
         display = display + "</table>"
     }
     return display
