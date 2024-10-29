@@ -9,7 +9,7 @@ function include(file) {
 include('../data/turkish/turkish-morphological-analysis.js');
 
 function createMorphologicalAnalysisTable(sentence){
-    let words = sentence.toLowerCase().split(' ');
+    let words = sentence.split(' ');
     let display = "<table> <tr> <th>Word</th> <th>Morphological Analysis</th> </tr>";
     for (let word of words) {
         display = display + "<tr><td>" + word + "</td>"
@@ -29,7 +29,7 @@ function createMorphologicalAnalysisTable(sentence){
             }
         }
         if (!found){
-            display = display + "<td> UNK </td>"
+            display = display + "<td>UNK</td>"
         }
         display = display + "</tr>"
     }
