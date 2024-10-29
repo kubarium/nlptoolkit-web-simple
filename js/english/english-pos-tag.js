@@ -7,34 +7,10 @@ function include(file) {
 }
 
 include('../data/english/english-tags.js');
-
-function createPosTableForSentence(sentence){
-    let words = sentence.toLowerCase().split(' ');
-    let display = "<table> <tr> <th>Word</th> <th>Tag(s)</th> </tr>";
-    for (let word of words) {
-        display = display + "<tr><td>" + word + "</td>"
-        let found = false
-        for (let i = 0; i < englishTags.length; i++) {
-            const wordObject = englishTags[i];
-            const wordName = wordObject["word"]
-            const wordTags = wordObject["tagSet"]
-            if (word === wordName){
-                found = true
-                display = display + "<td>" + wordTags + "</td>"
-                break;
-            }
-        }
-        if (!found){
-            display = display + "<td>UNK</td>"
-        }
-        display = display + "</tr>"
-    }
-    display = display + "</table>"
-    return display
-}
+include('../js/word-table.js');
 
 document.getElementById('posTag').addEventListener('submit', function (event) {
     event.preventDefault();
     const sentence = document.getElementById('sentence').value;
-    document.getElementById("result").innerHTML = createPosTableForSentence(sentence);
+    document.getElementById("result").innerHTML = createWordTableForSentence(sentence, "Tag(s)", englishTags, "tagSet", true, false);
 })
