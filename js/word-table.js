@@ -22,10 +22,14 @@ function createWordTableForSentence(sentence, tagHeader, featureArray, tagField,
             if (wordIfNotFound){
                 display = display + "<td>" + word + "</td>"
             } else {
-                if (tagField !== "polarity"){
+                if (tagField !== "polarity" && tagField !== "ner"){
                     display = display + "<td>UNK</td>"
                 } else {
-                    display = display + "<td>NEUTRAL</td>"
+                    if (tagField === "polarity"){
+                        display = display + "<td>NEUTRAL</td>"
+                    } else {
+                        display = display + "<td>NONE</td>"
+                    }
                 }
             }
         }
