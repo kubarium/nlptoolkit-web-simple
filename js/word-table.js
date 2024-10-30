@@ -22,7 +22,11 @@ function createWordTableForSentence(sentence, tagHeader, featureArray, tagField,
             if (wordIfNotFound){
                 display = display + "<td>" + word + "</td>"
             } else {
-                display = display + "<td>UNK</td>"
+                if (tagField !== "polarity"){
+                    display = display + "<td>UNK</td>"
+                } else {
+                    display = display + "<td>NEUTRAL</td>"
+                }
             }
         }
         display = display + "</tr>"
