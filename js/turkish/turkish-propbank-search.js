@@ -6,9 +6,9 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('/data/turkish/turkish-propbank.js');
-include('/data/turkish/turkish-wordnet.js');
-include('/js/wordnet-search.js');
+include('data/turkish/turkish-propbank.js');
+include('data/turkish/turkish-wordnet.js');
+include('js/wordnet-search.js');
 
 function createPropBankTable(synsetId){
     let display = "<table> <tr> <th>Arg</th> <th>Function</th> <th>Description</th> </tr>";

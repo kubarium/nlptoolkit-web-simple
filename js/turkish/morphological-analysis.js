@@ -6,7 +6,7 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('/data/turkish/turkish-morphological-analysis.js');
+include('data/turkish/turkish-morphological-analysis.js');
 
 function createMorphologicalAnalysisTable(sentence){
     let words = sentence.split(' ');
