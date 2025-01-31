@@ -6,7 +6,7 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish/morphological-dictionary.js');
+include('/data/turkish/morphological-dictionary.js');
 
 document.getElementById('morphologySearch').addEventListener('submit', function (event) {
     event.preventDefault();

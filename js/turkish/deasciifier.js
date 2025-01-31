@@ -6,8 +6,8 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish/turkish-deasciified.js');
-include('../js/word-table.js');
+include('/data/turkish/turkish-deasciified.js');
+include('/js/word-table.js');
 
 document.getElementById('deasciifier').addEventListener('submit', function (event) {
     event.preventDefault();

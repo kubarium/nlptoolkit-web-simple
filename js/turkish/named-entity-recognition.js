@@ -6,8 +6,8 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish/turkish-ner.js');
-include('../js/word-table.js');
+include('/data/turkish/turkish-ner.js');
+include('/js/word-table.js');
 
 document.getElementById('ner').addEventListener('submit', function (event) {
     event.preventDefault();

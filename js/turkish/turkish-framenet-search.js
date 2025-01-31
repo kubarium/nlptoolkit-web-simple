@@ -6,9 +6,9 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish/turkish-framenet.js');
-include('../data/turkish/turkish-wordnet.js');
-include('../js/wordnet-search.js');
+include('/data/turkish/turkish-framenet.js');
+include('/data/turkish/turkish-wordnet.js');
+include('/js/wordnet-search.js');
 
 function createFrameTable(frameName) {
     let display = "Lexical Units <br> <table> <tr> <th>Id</th> <th>Words</th> <th>Definition</th> </tr>";

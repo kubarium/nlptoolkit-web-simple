@@ -6,7 +6,7 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish/spell-dictionary.js');
+include('/data/turkish/spell-dictionary.js');
 
 function createSpellCheckTable(sentence){
     let words = sentence.toLowerCase().split(' ');

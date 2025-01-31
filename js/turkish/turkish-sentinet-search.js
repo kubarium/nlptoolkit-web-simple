@@ -6,8 +6,8 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish/turkish-sentinet.js');
-include('../data/turkish/turkish-sentiliteralnet.js');
+include('/data/turkish/turkish-sentinet.js');
+include('/data/turkish/turkish-sentiliteralnet.js');
 
 function displaySentiment(sentiNetObject){
     if (sentiNetObject["pscore"] > sentiNetObject["nscore"]){

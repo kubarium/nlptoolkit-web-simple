@@ -6,18 +6,18 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/turkish/turkish-wordnet.js');
-include('../data/turkish/turkish-wordnet-0.js');
-include('../data/turkish/turkish-wordnet-1.js');
-include('../data/turkish/turkish-wordnet-2.js');
-include('../data/turkish/turkish-wordnet-3.js');
-include('../data/turkish/turkish-wordnet-4.js');
-include('../data/turkish/turkish-wordnet-5.js');
-include('../data/turkish/turkish-wordnet-6.js');
-include('../data/turkish/turkish-wordnet-7.js');
-include('../data/turkish/turkish-wordnet-8.js');
-include('../data/turkish/turkish-wordnet-9.js');
-include('../js/wordnet-search.js');
+include('/data/turkish/turkish-wordnet.js');
+include('/data/turkish/turkish-wordnet-0.js');
+include('/data/turkish/turkish-wordnet-1.js');
+include('/data/turkish/turkish-wordnet-2.js');
+include('/data/turkish/turkish-wordnet-3.js');
+include('/data/turkish/turkish-wordnet-4.js');
+include('/data/turkish/turkish-wordnet-5.js');
+include('/data/turkish/turkish-wordnet-6.js');
+include('/data/turkish/turkish-wordnet-7.js');
+include('/data/turkish/turkish-wordnet-8.js');
+include('/data/turkish/turkish-wordnet-9.js');
+include('/js/wordnet-search.js');
 
 document.getElementById('wordSearch').addEventListener('submit', function (event) {
     event.preventDefault();
