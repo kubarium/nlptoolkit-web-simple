@@ -6,7 +6,7 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/english/english-propbank.js');
+include('data/english/english-propbank.js');
 
 function createPredicateTable(predicateName){
     let display = "<table> <tr> <th>Id</th> <th>Name</th> <th>Descr</th> <th>f</th> <th>n</th> </tr>";

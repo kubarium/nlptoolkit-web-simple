@@ -6,8 +6,8 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/english/english-wordnet.js');
-include('../js/wordnet-search.js');
+include('data/english/english-wordnet.js');
+include('js/wordnet-search.js');
 
 document.getElementById('wordSearch').addEventListener('submit', function (event) {
     event.preventDefault();

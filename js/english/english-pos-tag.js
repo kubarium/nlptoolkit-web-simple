@@ -6,8 +6,8 @@ function include(file) {
     document.getElementsByTagName('head').item(0).appendChild(script);
 }
 
-include('../data/english/english-tags.js');
-include('../js/word-table.js');
+include('data/english/english-tags.js');
+include('js/word-table.js');
 
 document.getElementById('posTag').addEventListener('submit', function (event) {
     event.preventDefault();
