@@ -1,28 +1,38 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
+  <head>
+    <meta charset="UTF-8" />
     <title>Turkish FrameNet</title>
-</head>
-<body>
-<form id="frameSearch">
-    <label for="frame_name">Frame name:</label>
-    <input type="text" id="frame_name" name="frame_name" required><br><br>
-    <input type="submit" value="Find Frame">
-</form>
-<br>
-<form id="verbSearch">
-    <label for="verb_name">Verb:</label>
-    <input type="text" id="verb_name" name="verb_name" required><br><br>
-    <input type="submit" value="Find Verb">
-</form>
-<br>
-<form id="idSearch">
-    <label for="verb_id">Verb SynSet Id:</label>
-    <input type="text" id="verb_id" name="verb_id" required><br><br>
-    <input type="submit" value="Find Verb">
-</form>
-<p id="result"></p>
-<script src="js/turkish/turkish-framenet-search.js"></script>
-</body>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.23.0/dist/css/uikit.min.css" />
+    <link rel="stylesheet" href="css/website/nlp_toolkit.css" />
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.23.0/dist/js/uikit.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/uikit@3.23.0/dist/js/uikit-icons.min.js"></script>
+  </head>
+  <body>
+    <header class="uk-flex uk-flex-around uk-background-default" uk-sticky>
+      <form id="frameSearch">
+        <fieldset class="uk-flex">
+          <legend>Frame name</legend>
+          <input class="uk-input" type="text" id="frame_name" name="frame_name" required />
+          <button class="uk-button uk-button-primary" type="submit">Find</button>
+        </fieldset>
+      </form>
+      <form id="verbSearch">
+        <fieldset class="uk-flex">
+          <legend>Verb</legend>
+          <input class="uk-input" type="text" id="verb_name" name="verb_name" required />
+          <button class="uk-button uk-button-primary" type="submit">Find</button>
+        </fieldset>
+      </form>
+      <form id="idSearch">
+        <fieldset class="uk-flex">
+          <legend>Verb SynSet Id</legend>
+          <input class="uk-input" type="text" id="verb_id" name="verb_id" required />
+          <button class="uk-button uk-button-primary" type="submit">Find</button>
+        </fieldset>
+      </form>
+    </header>
+    <main id="result"></main>
+    <script src="js/turkish/turkish-framenet-search.js"></script>
+  </body>
 </html>

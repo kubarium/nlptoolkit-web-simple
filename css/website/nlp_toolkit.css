@@ -1,0 +1,20 @@
+.uk-breadcrumb>:nth-child(n+2):not(.uk-first-column)::before {
+    content: ">" !important;
+}
+
+.uk-navbar-dropdown {
+    top: 65px !important;
+}
+
+fieldset {
+    border: 1px groove lightsteelblue;
+    font-weight: bold;
+}
+
+.border-bottom {
+    border-bottom: 1px solid lightsteelblue;
+}
+
+.border-bottom tr:last-child {
+    border-bottom: 0px !important;
+}

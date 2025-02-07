@@ -43,9 +43,29 @@ function createFrameTable(frameName) {
 }
 
 function createTableOfFrames(frames) {
-    let display = "<table> <tr> <th>Frame</th> <th>Lexical Units</th> <th>Frame Elements</th> </tr>";
+
+    let display = `
+        <table class="uk-table uk-table-small ">
+            <thead>
+                <tr>
+                    <th>Frame</th>
+                    <th>Lexical Units</th>
+                    <th>Frame Elements</th>
+                </tr>
+            </thead >`;
     for (let frame of frames) {
-        display = display + "<tr><td>" + frame["frame"] + "</td><td><table> <tr> <th>Id</th> <th>Words</th> <th>Definition</th> </tr>";
+        display = display + `<tr>
+            <td class="uk-text-bolder border-bottom"> ${frame["frame"]} </td>
+            <td class="uk-padding-remove border-bottom">
+                <table class="uk-table uk-table-striped uk-table-hover uk-table-small ">
+                    <thead>
+                        <tr>
+                            <th class="uk-width-1-5">Id</th>
+                            <th class="uk-width-2-5">Words</th>
+                            <th class="uk-width-2-5">Definition</th>
+                        </tr>
+                    </thead>
+                    <tbody>`;
         let lexicalUnits = frame["lexicalUnits"];
         for (let lexicalUnit of lexicalUnits) {
             let synset = getSynsetWithIdBinarySearch(lexicalUnit, turkishWordNet)
@@ -54,10 +74,10 @@ function createTableOfFrames(frames) {
                 display = createSynonym(display, -1, synset["words"]) + "</td><td>" + synset["definition"] + "</td></tr>"
             }
         }
-        display = display + "</table></td><td>"
+        display = display + `</tbody></table></td><td class="border-bottom uk-table-shrink">`
         let frameElements = frame["frameElements"];
         for (let frameElement of frameElements) {
-            display = display + " " + frameElement;
+            display = `${display} <span class="uk-label">${frameElement}</span>`;
         }
         display = display + "</td></tr>"
     }
@@ -80,9 +100,9 @@ function getFramesForSynSet(synset) {
     return result
 }
 
-function frameListContains(frames, frame){
+function frameListContains(frames, frame) {
     for (let current of frames) {
-        if (current["frame"] === frame["frame"]){
+        if (current["frame"] === frame["frame"]) {
             return true
         }
     }
@@ -94,7 +114,7 @@ function getFramesForSynSets(synsets) {
     for (let synset of synsets) {
         let current = getFramesForSynSet(synset["id"]);
         for (let frame of current) {
-            if (!frameListContains(result, frame)){
+            if (!frameListContains(result, frame)) {
                 result.push(frame)
             }
         }
