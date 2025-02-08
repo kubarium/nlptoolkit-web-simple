@@ -10,7 +10,66 @@ include('data/turkish/turkish-framenet.js');
 include('data/turkish/turkish-wordnet.js');
 include('js/wordnet-search.js');
 
-function createFrameTable(frameName) {
+
+/**
+ * It returns the HTML string that is the results, ie. its elements and lexical units, for a particular frame
+ *
+ * @param {string} frame
+ * @returns {string}
+ */
+function displayFrame(frame) {
+    let frameAnalysis = analyzeFrame(frame);
+
+    return `
+        <h2 class="uk-h3 uk-text-primary">Frame Elements for ${frame}</h2>
+        <div class="uk-margin">${frameAnalysis.frameElementsList}</div>
+        <h2 class="uk-h3 uk-text-primary">Lexical Units for ${frame}</h2>
+        <table class="uk-table uk-table-striped uk-table-hover uk-table-small">
+            <thead>
+                <tr>
+                    <th class="uk-width-1-5">Id</th>
+                    <th class="uk-width-2-5">Words</th>
+                    <th class="uk-width-2-5">Definition</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${frameAnalysis.lexicalUnitsTableBody}
+            </tbody>
+        </table>
+    `;
+}
+
+/**
+ * It returns the result of multiple frames in an accordion component
+ *
+ * @param {string} frame
+ * @returns {string}
+ */
+function displayFrames(frames) {
+    let display = `<ul uk-accordion class="framenet-verb">`;
+
+    for (let frame of frames) {
+        display += `
+            <li>
+                <a class="uk-accordion-title" href>${frame["frame"]}</a>
+                <div class="uk-accordion-content">
+                    ${displayFrame(frame["frame"])}
+                </div>
+            </li>
+        `;
+    }
+
+    display += `</ul>`;
+    return display;
+}
+
+/**
+ * After validitading a frame name, it returns a frame's lexical units and elements as an object
+ *
+ * @param {string} frameName The name of the frame to look up
+ * @returns {{ lexicalUnitsTableBody: string; frameElementsList: string; }} An object of HTML strings
+ */
+function analyzeFrame(frameName) {
     let lexicalUnitsTableBody = ``;
     let frameElementsList = ``;
 
@@ -37,67 +96,7 @@ function createFrameTable(frameName) {
         }
     }
 
-    return `
-        <h2 class="uk-h3 uk-text-primary">Lexical Units for ${frameName}</h2>
-        <table class="uk-table uk-table-striped uk-table-hover uk-table-small">
-            <thead>
-                <tr>
-                    <th class="uk-width-1-5">Id</th>
-                    <th class="uk-width-2-5">Words</th>
-                    <th class="uk-width-2-5">Definition</th>
-                </tr>
-            </thead>
-            <tbody>
-                ${lexicalUnitsTableBody}
-            </tbody>
-        </table>
-        <h2 class="uk-h3 uk-text-primary">Frame Elements for ${frameName}</h2>
-        <div class="uk-margin">${frameElementsList}</div>
-    `;
-
-}
-
-function createTableOfFrames(frames) {
-
-    let display = `
-        <table class="uk-table uk-table-small ">
-            <thead>
-                <tr>
-                    <th>Frame</th>
-                    <th>Lexical Units</th>
-                    <th>Frame Elements</th>
-                </tr>
-            </thead>`;
-    for (let frame of frames) {
-        display = display + `<tr>
-            <td class="uk-text-bolder border-bottom"> ${frame["frame"]} </td>
-            <td class="uk-padding-remove border-bottom">
-                <table class="uk-table uk-table-striped uk-table-hover uk-table-small ">
-                    <thead>
-                        <tr>
-                            <th class="uk-width-1-5">Id</th>
-                            <th class="uk-width-2-5">Words</th>
-                            <th class="uk-width-2-5">Definition</th>
-                        </tr>
-                    </thead>
-                    <tbody>`;
-        let lexicalUnits = frame["lexicalUnits"];
-        for (let lexicalUnit of lexicalUnits) {
-            let synset = getSynsetWithIdBinarySearch(lexicalUnit, turkishWordNet)
-            if (synset != null) {
-                display = display + "<tr><td>" + synset["id"] + "</td><td>";
-                display = createSynonym(display, -1, synset["words"]) + "</td><td>" + synset["definition"] + "</td></tr>"
-            }
-        }
-        display = display + `</tbody></table></td><td class="border-bottom uk-table-shrink">`
-        let frameElements = frame["frameElements"];
-        for (let frameElement of frameElements) {
-            display = `${display} <span class="uk-label">${frameElement}</span>`;
-        }
-        display = display + "</td></tr>"
-    }
-    display = display + "</table>"
-    return display
+    return { lexicalUnitsTableBody, frameElementsList };
 }
 
 function getFramesForSynSet(synset) {
@@ -140,7 +139,7 @@ function getFramesForSynSets(synsets) {
 document.getElementById('frameSearch').addEventListener('submit', function (event) {
     event.preventDefault();
     const frameName = document.getElementById('frame_name').value;
-    document.getElementById("result").innerHTML = createFrameTable(frameName);
+    document.getElementById("result").innerHTML = displayFrame(frameName);
 })
 
 document.getElementById('verbSearch').addEventListener('submit', function (event) {
@@ -148,12 +147,12 @@ document.getElementById('verbSearch').addEventListener('submit', function (event
     const verbName = document.getElementById('verb_name').value;
     let synsets = getSynsetsWithWord(verbName, turkishWordNet)
     let frames = getFramesForSynSets(synsets)
-    document.getElementById("result").innerHTML = createTableOfFrames(frames)
+    document.getElementById("result").innerHTML = displayFrames(frames)
 })
 
 document.getElementById('idSearch').addEventListener('submit', function (event) {
     event.preventDefault();
     const verbId = document.getElementById('verb_id').value;
     let frames = getFramesForSynSet(verbId)
-    document.getElementById("result").innerHTML = createTableOfFrames(frames)
+    document.getElementById("result").innerHTML = displayFrames(frames)
 })
