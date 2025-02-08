@@ -10,6 +10,7 @@ include('data/turkish/turkish-framenet.js');
 include('data/turkish/turkish-wordnet.js');
 include('js/wordnet-search.js');
 
+let searchTerm = "";
 
 /**
  * It returns the HTML string that is the results, ie. its elements and lexical units, for a particular frame
@@ -21,9 +22,13 @@ function displayFrame(frame) {
     let frameAnalysis = analyzeFrame(frame);
 
     return `
-        <h2 class="uk-h3 uk-text-primary">Frame Elements for ${frame}</h2>
+        <h2 class="uk-h3 uk-text-muted">
+            Frame Elements for <a href="#" onclick="findFrame('${frame}')"> ${frame} </a>
+        </h2>
         <div class="uk-margin">${frameAnalysis.frameElementsList}</div>
-        <h2 class="uk-h3 uk-text-primary">Lexical Units for ${frame}</h2>
+        <h2 class="uk-h3 uk-text-muted">
+            Lexical Units for <a href="#" onclick="findFrame('${frame}')"> ${frame} </a>
+        </h2>
         <table class="uk-table uk-table-striped uk-table-hover uk-table-small">
             <thead>
                 <tr>
@@ -46,21 +51,23 @@ function displayFrame(frame) {
  * @returns {string}
  */
 function displayFrames(frames) {
-    let display = `<ul uk-accordion class="framenet-verb">`;
-
-    for (let frame of frames) {
-        display += `
-            <li>
-                <a class="uk-accordion-title" href>${frame["frame"]}</a>
-                <div class="uk-accordion-content">
+    return `
+        <h2 class="uk-h3 uk-text-muted uk-text-center">
+            ${frames.length} result${frames.length > 1 ? 's' : frames.length == 0 ? 's' : ''} for ${searchTerm}
+        </h2>
+        <hr class="uk-divider-icon"/>
+        <ul uk-accordion class="framenet-verb">
+            ${frames.map((frame, index) => {
+        return `
+                <li>
+                    <a class="uk-accordion-title" href>${index + 1}. ${frame["frame"]}</a>
+                    <div class="uk-accordion-content">
                     ${displayFrame(frame["frame"])}
-                </div>
-            </li>
-        `;
-    }
-
-    display += `</ul>`;
-    return display;
+                    </div>
+                </li>`
+    }).join('')}
+        </ul>
+    `;
 }
 
 /**
@@ -80,14 +87,17 @@ function analyzeFrame(frameName) {
             for (let lexicalUnit of lexicalUnits) {
                 let synset = getSynsetWithIdBinarySearch(lexicalUnit, turkishWordNet)
                 if (synset != null) {
+                    let synonyms = synset["words"].map(word => `<a href="#" onclick="findVerb('${word}')">${word}</a>`)
+
                     lexicalUnitsTableBody += `
                     <tr>
-                        <td> ${synset["id"]} </td>
-                        <td> ${createSynonym(" ", -1, synset["words"])} </td>
+                        <td> <a href="#" onclick="findSynSetID('${synset["id"]}')"> ${synset["id"]} </a> </td>
+                        <td> ${synonyms.join("; ")} </td>
                         <td> ${synset["definition"]} </td>
                     </tr>`;
                 }
             }
+            //${createSynonym(" ", -1, synset["words"])}
             let frameElements = frame["frameElements"];
             for (let frameElement of frameElements) {
                 frameElementsList += `<span class="uk-label">${frameElement}</span> `;
@@ -97,6 +107,19 @@ function analyzeFrame(frameName) {
     }
 
     return { lexicalUnitsTableBody, frameElementsList };
+}
+
+function findFrame(frame) {
+    document.getElementById('frame_name').value = frame;
+    document.getElementById('frameSearch').requestSubmit();
+}
+function findVerb(verb) {
+    document.getElementById('verb_name').value = verb;
+    document.getElementById('verbSearch').requestSubmit();
+}
+function findSynSetID(id) {
+    document.getElementById('verb_id').value = id;
+    document.getElementById('idSearch').requestSubmit();
 }
 
 function getFramesForSynSet(synset) {
@@ -147,12 +170,18 @@ document.getElementById('verbSearch').addEventListener('submit', function (event
     const verbName = document.getElementById('verb_name').value;
     let synsets = getSynsetsWithWord(verbName, turkishWordNet)
     let frames = getFramesForSynSets(synsets)
+    searchTerm = verbName
+
     document.getElementById("result").innerHTML = displayFrames(frames)
+    document.querySelector(".uk-accordion-title").parentNode.classList.add("uk-open")
 })
 
 document.getElementById('idSearch').addEventListener('submit', function (event) {
     event.preventDefault();
     const verbId = document.getElementById('verb_id').value;
     let frames = getFramesForSynSet(verbId)
+    searchTerm = verbId
+
     document.getElementById("result").innerHTML = displayFrames(frames)
+    document.querySelector(".uk-accordion-title").parentNode.classList.add("uk-open")
 })
