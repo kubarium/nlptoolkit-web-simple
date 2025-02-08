@@ -11,7 +11,9 @@ include('data/turkish/turkish-wordnet.js');
 include('js/wordnet-search.js');
 
 function createFrameTable(frameName) {
-    let display = "Lexical Units <br> <table> <tr> <th>Id</th> <th>Words</th> <th>Definition</th> </tr>";
+    let lexicalUnitsTableBody = ``;
+    let frameElementsList = ``;
+
     for (let i = 0; i < turkishFrameNet.length; i++) {
         let frame = turkishFrameNet[i];
         if (frame["frame"] === frameName) {
@@ -19,27 +21,40 @@ function createFrameTable(frameName) {
             for (let lexicalUnit of lexicalUnits) {
                 let synset = getSynsetWithIdBinarySearch(lexicalUnit, turkishWordNet)
                 if (synset != null) {
-                    display = display + "<tr><td>" + synset["id"] + "</td><td>";
-                    display = createSynonym(display, -1, synset["words"]) + "</td><td>" + synset["definition"] + "</td></tr>"
+                    lexicalUnitsTableBody += `
+                    <tr>
+                        <td> ${synset["id"]} </td>
+                        <td> ${createSynonym(" ", -1, synset["words"])} </td>
+                        <td> ${synset["definition"]} </td>
+                    </tr>`;
                 }
             }
-            break;
-        }
-    }
-    display = display + "</table> <br>"
-    display = display + "Frame Elements <br> <table> <th>Element</th> </tr>";
-    for (let i = 0; i < turkishFrameNet.length; i++) {
-        let frame = turkishFrameNet[i];
-        if (frame["frame"] === frameName) {
             let frameElements = frame["frameElements"];
             for (let frameElement of frameElements) {
-                display = display + "<tr><td>" + frameElement + "</td></tr>"
+                frameElementsList += `<span class="uk-label">${frameElement}</span> `;
             }
             break;
         }
     }
-    display = display + "</table>"
-    return display
+
+    return `
+        <h2 class="uk-h3 uk-text-primary">Lexical Units for ${frameName}</h2>
+        <table class="uk-table uk-table-striped uk-table-hover uk-table-small">
+            <thead>
+                <tr>
+                    <th class="uk-width-1-5">Id</th>
+                    <th class="uk-width-2-5">Words</th>
+                    <th class="uk-width-2-5">Definition</th>
+                </tr>
+            </thead>
+            <tbody>
+                ${lexicalUnitsTableBody}
+            </tbody>
+        </table>
+        <h2 class="uk-h3 uk-text-primary">Frame Elements for ${frameName}</h2>
+        <div class="uk-margin">${frameElementsList}</div>
+    `;
+
 }
 
 function createTableOfFrames(frames) {
@@ -52,7 +67,7 @@ function createTableOfFrames(frames) {
                     <th>Lexical Units</th>
                     <th>Frame Elements</th>
                 </tr>
-            </thead >`;
+            </thead>`;
     for (let frame of frames) {
         display = display + `<tr>
             <td class="uk-text-bolder border-bottom"> ${frame["frame"]} </td>
