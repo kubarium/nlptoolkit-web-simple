@@ -11,4 +11,6 @@ $(function () {
         $("#toolkit").text($(event.target).text())
         $(".uk-breadcrumb").show()
     })
+
+    $(".uk-navbar-dropdown-nav a").first().trigger("click")
 });
