@@ -1,27 +1,43 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import TurkishFramenet from '../views/TurkishFramenet.vue'
+import Home from '../views/Home.vue'
 
 const router = createRouter({
+  linkActiveClass: 'uk-active',
+  linkExactActiveClass: 'uk-active',
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: '/',
       name: 'home',
-      component: TurkishFramenet,
-      meta: { language: "Turkish", toolkit: "FrameNet" }
+      component: Home,
     },
     {
-      path: '/about',
-      name: 'about',
+      path: '/:pathMatch(.*)*',
+      name: 'catch-all',
+      component: Home,
+    },
+    {
+      path: '/TurkishFrameNet',
+      name: 'TurkishFrameNet',
+      component: () => import('../views/TurkishFrameNet.vue'),
+    },
+    {
+      path: '/TurkishPropBank',
+      name: 'TurkishPropBank',
       // route level code-splitting
       // this generates a separate chunk (About.[hash].js) for this route
       // which is lazy-loaded when the route is visited.
-      component: () => import('../views/AboutView.vue'),
+      component: () => import('../views/TurkishPropBank.vue'),
     },
   ],
 })
 
-router.beforeEach((to, from) => {
+router.afterEach((to, from) => {
+  const component = to.matched[0]?.components?.default
+
+  if (component && component.metaInfo) {
+    to.meta = component.metaInfo
+  }
 
 })
 
