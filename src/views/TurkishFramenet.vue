@@ -3,6 +3,8 @@ import turkishFrameNet from "@/data/turkish/turkish-framenet.json"
 import turkishWordNet from "@/data/turkish/turkish-wordnet.json"
 import { reactive, ref } from "vue"
 
+defineOptions({ metaInfo: { language: "Turkish", toolkit: "FrameNet" } })
+
 const searchTerms = reactive({
   frame: "", verb: "", id: ""
 })
@@ -132,7 +134,7 @@ function getFramesForSynSets(synsets) {
         <div uk-grid>
           <div class="uk-width-2-3">
             <span class="uk-label uk-margin-xsmall-right" v-for="frame in result.frameElements" :key="frame">{{ frame
-            }}</span>
+              }}</span>
           </div>
           <div class="uk-width-1-3 uk-divider-vertical">
             <button class="uk-button uk-button-secondary uk-width-1-1 uk-height-1-1"
