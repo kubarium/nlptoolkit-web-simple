@@ -2,11 +2,24 @@
 import { useRoute } from 'vue-router';
 
 const route = useRoute()
+const isRouteActive = (targetPath) => {
+  return route.path === targetPath;
+};
+const menu = {
+  Turkish: {
+    Resources: ['FrameNet', 'PropBank', 'WordNet', 'SentiNet', 'Dictionary', 'Morphological Lexicon'],
+    Processing: ['Spell Checker', 'Morphological Analysis', 'Morphological Disambiguation', 'Asciifier', 'Deasciifier', 'Word Sense Disambiguation', 'Sentiment Analysis', 'Named Entity Recognition']
+  },
+  English: {
+    Resources: ['PropBank', 'WordNet'],
+    Processing: ['Pos Tagger']
+  }
+}
 </script>
 <template>
   <header class="uk-container uk-padding-small uk-flex uk-flex-between uk-flex-middle">
     <span class="uk-logo">NLP Toolkit</span>
-    <ul class="uk-breadcrumb uk-margin-remove" aria-label="Breadcrumb">
+    <ul class="uk-breadcrumb uk-margin-remove" aria-label="Breadcrumb" v-if="route.meta.language">
       <li><span id="language">{{ route.meta.language }}</span></li>
       <li><span id="toolkit">{{ route.meta.toolkit }}</span></li>
     </ul>
@@ -22,54 +35,22 @@ const route = useRoute()
                     <ul class="uk-nav uk-navbar-dropdown-nav">
                       <li class="uk-text-bold">Resources</li>
                       <li class="uk-nav-divider"></li>
-                      <li>
-                        <a href="turkish-framenet.html">FrameNet</a>
-                      </li>
-                      <li>
-                        <a href="turkish-propbank.html">PropBank</a>
-                      </li>
-                      <li>
-                        <a href="turkish-wordnet.html">WordNet</a>
-                      </li>
-                      <li>
-                        <a href="turkish-sentinet.html">SentiNet</a>
-                      </li>
-                      <li>
-                        <a href="turkish-dictionary.html">Dictionary</a>
-                      </li>
-                      <li>
-                        <a href="turkish-morphological-lexicon.html">Morphological Lexicon</a>
-                      </li>
+                      <template v-for="path in menu.Turkish.Resources" :key="path">
+                        <li :class="{ 'uk-active': isRouteActive(`/Turkish${path}`) }">
+                          <router-link :to="`/Turkish${path.replaceAll(' ', '')}`">{{ path }}</router-link>
+                        </li>
+                      </template>
                     </ul>
                   </div>
                   <div>
                     <ul class="uk-nav uk-navbar-dropdown-nav">
                       <li class="uk-text-bold">Processing</li>
                       <li class="uk-nav-divider"></li>
-                      <li>
-                        <a href="turkish-spell-checker.html">Spell Checker</a>
-                      </li>
-                      <li>
-                        <a href="turkish-morphological-analysis.html">Morphological Analysis</a>
-                      </li>
-                      <li>
-                        <a href="turkish-morphological-disambiguation.html">Morphological Disambiguation</a>
-                      </li>
-                      <li>
-                        <a href="turkish-asciifier.html">Asciifier</a>
-                      </li>
-                      <li>
-                        <a href="turkish-deasciifier.html">Deasciifier</a>
-                      </li>
-                      <li>
-                        <a href="turkish-word-sense-disambiguation.html">Word Sense Disambiguation</a>
-                      </li>
-                      <li>
-                        <a href="turkish-sentiment-analysis.html">Sentiment Analysis</a>
-                      </li>
-                      <li>
-                        <a href="turkish-named-entity-recognition.html">Named Entity Recognition</a>
-                      </li>
+                      <template v-for="path in menu.Turkish.Processing" :key="path">
+                        <li :class="{ 'uk-active': isRouteActive(`/Turkish${path}`) }">
+                          <router-link :to="`/Turkish${path.replaceAll(' ', '')}`">{{ path }}</router-link>
+                        </li>
+                      </template>
                     </ul>
                   </div>
                 </div>
@@ -83,21 +64,22 @@ const route = useRoute()
                     <ul class="uk-nav uk-navbar-dropdown-nav">
                       <li class="uk-text-bold">Resources</li>
                       <li class="uk-nav-divider"></li>
-                      <li>
-                        <a href="english-propbank.html">PropBank</a>
-                      </li>
-                      <li>
-                        <a href="english-wordnet.html">WordNet</a>
-                      </li>
+                      <template v-for="path in menu.English.Resources" :key="path">
+                        <li :class="{ 'uk-active': isRouteActive(`/English${path}`) }">
+                          <router-link :to="`/English${path.replaceAll(' ', '')}`">{{ path }}</router-link>
+                        </li>
+                      </template>
                     </ul>
                   </div>
                   <div>
                     <ul class="uk-nav uk-navbar-dropdown-nav">
                       <li class="uk-text-bold">Processing</li>
                       <li class="uk-nav-divider"></li>
-                      <li>
-                        <a href="english-pos-tagger.html">Pos Tagger</a>
-                      </li>
+                      <template v-for="path in menu.English.Processing" :key="path">
+                        <li :class="{ 'uk-active': isRouteActive(`/English${path}`) }">
+                          <router-link :to="`/English${path.replaceAll(' ', '')}`">{{ path }}</router-link>
+                        </li>
+                      </template>
                     </ul>
                   </div>
                 </div>
