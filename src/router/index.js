@@ -1,5 +1,5 @@
 import { createRouter, createWebHistory } from 'vue-router'
-import HomeView from '../views/HomeView.vue'
+import TurkishFramenet from '../views/TurkishFramenet.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -7,7 +7,8 @@ const router = createRouter({
     {
       path: '/',
       name: 'home',
-      component: HomeView,
+      component: TurkishFramenet,
+      meta: { language: "Turkish", toolkit: "FrameNet" }
     },
     {
       path: '/about',
@@ -18,6 +19,10 @@ const router = createRouter({
       component: () => import('../views/AboutView.vue'),
     },
   ],
+})
+
+router.beforeEach((to, from) => {
+
 })
 
 export default router
