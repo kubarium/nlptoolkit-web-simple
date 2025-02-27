@@ -1,4 +1,5 @@
 <script setup>
+import SearchForm from "@/components/SearchForm.vue"
 import turkishFrameNet from "@/data/turkish/turkish-framenet.json"
 import turkishWordNet from "@/data/turkish/turkish-wordnet.json"
 import { reactive, ref } from "vue"
@@ -94,27 +95,9 @@ function getFramesForSynSets(synsets) {
 
 <template>
   <header class="uk-flex uk-flex-around uk-background-default" uk-sticky>
-    <form id="frameSearch" @submit.prevent="findFrame(searchTerms.frame)">
-      <fieldset class="uk-flex">
-        <legend>Frame name</legend>
-        <input class="uk-input" type="text" required v-model="searchTerms.frame" />
-        <button class="uk-button uk-button-primary" type="submit">Find</button>
-      </fieldset>
-    </form>
-    <form id="verbSearch" @submit.prevent="findVerb(searchTerms.verb)">
-      <fieldset class="uk-flex">
-        <legend>Verb</legend>
-        <input class="uk-input" type="text" required v-model="searchTerms.verb" />
-        <button class="uk-button uk-button-primary" type="submit">Find</button>
-      </fieldset>
-    </form>
-    <form id="idSearch" @submit.prevent="findSynSetID(searchTerms.id)">
-      <fieldset class="uk-flex">
-        <legend>Verb SynSet Id</legend>
-        <input class="uk-input" type="text" required v-model="searchTerms.id" />
-        <button class="uk-button uk-button-primary" type="submit">Find</button>
-      </fieldset>
-    </form>
+    <SearchForm @submit.prevent="findFrame(searchTerms.frame)" v-model="searchTerms.frame">Frame Name</SearchForm>
+    <SearchForm @submit.prevent="findVerb(searchTerms.verb)" v-model="searchTerms.verb">Verb</SearchForm>
+    <SearchForm @submit.prevent="findSynSetID(searchTerms.id)" v-model="searchTerms.id">Verb SynSet Id</SearchForm>
   </header>
   <template v-if="searching">
     <h2 class="uk-h3 uk-text-muted uk-text-center">
@@ -134,7 +117,7 @@ function getFramesForSynSets(synsets) {
         <div uk-grid>
           <div class="uk-width-2-3">
             <span class="uk-label uk-margin-xsmall-right" v-for="frame in result.frameElements" :key="frame">{{ frame
-              }}</span>
+            }}</span>
           </div>
           <div class="uk-width-1-3 uk-divider-vertical">
             <button class="uk-button uk-button-secondary uk-width-1-1 uk-height-1-1"
