@@ -24,9 +24,6 @@ const router = createRouter({
     {
       path: '/TurkishPropBank',
       name: 'TurkishPropBank',
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/TurkishPropBank.vue'),
     },
   ],
@@ -35,8 +32,8 @@ const router = createRouter({
 router.afterEach((to, from) => {
   const component = to.matched[0]?.components?.default
 
-  if (component && component.metaInfo) {
-    to.meta = component.metaInfo
+  if (component && component.meta) {
+    to.meta = component.meta
   }
 
 })
