@@ -1,13 +1,13 @@
 <script setup>
 const props = defineProps({
-  searchResults: Array,
+  searchResults: Number,
   for: String
 })
 </script>
 
 <template>
   <h2 class="uk-h3 uk-text-muted uk-text-center">
-    {{ props.searchResults.length }} result{{ props.searchResults.length > 1 ? 's' : props.searchResults.length == 0 ?
+    {{ props.searchResults }} result{{ props.searchResults > 1 ? 's' : props.searchResults == 0 ?
       's' : '' }}
     for {{ props.for }}
   </h2>
