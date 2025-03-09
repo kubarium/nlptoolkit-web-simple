@@ -8,7 +8,7 @@ const model = defineModel()
       <legend>
         <slot></slot>
       </legend>
-      <input class="uk-input" type="text" required v-model="model" />
+      <input class="uk-input" type="text" required v-model.trim="model" />
       <button class="uk-button uk-button-primary" type="submit">Find</button>
     </fieldset>
   </form>
