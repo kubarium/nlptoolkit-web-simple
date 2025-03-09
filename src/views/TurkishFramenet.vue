@@ -70,7 +70,7 @@ function findSynSetID(word) {
               result.frame }}</button>
           </div>
         </div>
-        <h2 class="uk-h3 uk-text-muted">
+        <h2 class="uk-h3 uk-text-muted uk-margin-small">
           Lexical Units
           <hr />
         </h2>
