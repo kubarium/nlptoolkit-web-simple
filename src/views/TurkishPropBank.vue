@@ -1,10 +1,9 @@
 <script setup>
 import SearchForm from '@/components/SearchForm.vue'
 import SearchResultsCounter from '@/components/SearchResultsCounter.vue'
-import turkishFrameNet from "@/data/turkish/turkish-framenet.json"
 import turkishPropbank from "@/data/turkish/turkish-propbank.json"
 import turkishWordNet from "@/data/turkish/turkish-wordnet.json"
-import { getFramesForSynSet, getPropsForSynSets, getSynsetsWithWord, searchInWordnet } from '@/utils/nlp'
+import { getPropsForSynSets, getSynsetsWithWord } from '@/utils/nlp'
 import { scrollToTop } from '@/utils/scrollToTop'
 import { reactive, ref } from 'vue'
 
@@ -13,21 +12,30 @@ const searchTerms = reactive({
   frame: "", verb: "", id: ""
 })
 const search = ref("")
-const searchResults = ref([])
+const searchResults = ref()
 
 
 
 function findVerb(word) {
   search.value = word
   searchTerms.verb = ""
-  // searchResults.value = getSynsetsWithWord(word, turkishWordNet)
   searchResults.value = getPropsForSynSets(getSynsetsWithWord(word, turkishWordNet), turkishPropbank)
   scrollToTop()
 }
-function findSynSetID(word) {
-  search.value = word
+function findSynSetID(id) {
+  search.value = id
   searchTerms.id = ""
-  searchResults.value = getFramesForSynSet(word, turkishPropbank)
+  let synSet = turkishPropbank.find(entry => entry.id == id)
+  if(synSet) {
+    searchResults.value = {
+      [id]: {
+        definition: "",
+        args: synSet.args
+      }
+    }
+  } else {
+    searchResults.value = []
+  }
   scrollToTop()
 }
 </script>
@@ -38,34 +46,44 @@ function findSynSetID(word) {
     <SearchForm @submit.prevent="findSynSetID(searchTerms.id)" v-model="searchTerms.id">Verb SynSet Id</SearchForm>
   </header>
   <template v-if="search">
-    <SearchResultsCounter :searchResults="searchResults" :for="search" />
+    <SearchResultsCounter :searchResults="Object.entries(searchResults).length" :for="search" />
   </template>
-  <table class="uk-table uk-table-striped uk-table-hover uk-table-small" v-if="searchResults.length > 0">
-    <thead>
-      <tr>
-        <th class="uk-width-1-5">Id</th>
-        <th class="uk-width-2-5">Definition</th>
-        <th class="uk-width-1-5">Arg</th>
-        <th class="uk-width-1-5">Function</th>
-        <th class="uk-width-1-5">Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr v-for="unit in searchResults" :key="unit">
-        <td> <a @click="findSynSetID(unit.id)"> {{ unit.id }} </a> </td>
-        <td> {{ unit["definition"] }} </td>
-        <td>
-          <!-- <template v-for="(word, index) in searchInWordnet(unit, turkishWordNet)['words']" :key="word">
-            <span v-if="index > 0">; </span>
-            <a @click="findVerb(word)">{{ word }}</a>
-          </template> -->
-          {{ unit["arg"] }}
-        </td>
-        <td> {{ unit["function"] }} </td>
-        <td> {{ unit["description"] }} </td>
-      </tr>
-    </tbody>
-  </table>
+  <ul uk-accordion>
+    <li v-for="(result, id, index) of searchResults" :key="id">
+      <a class="uk-accordion-title" href>{{ index + 1 }}. {{ id }}</a>
+      <div class="uk-accordion-content">
+        <div uk-grid v-if="result.definition">
+          <div class="uk-width-2-3">
+            <h2 class="uk-h3 uk-text-muted">
+              {{ result["definition"] }}
+            </h2>
+          </div>
+          <div class="uk-width-1-3 uk-divider-vertical">
+            <button class="uk-button uk-button-secondary uk-width-1-1 uk-height-1-1"
+              @click="findSynSetID(id)">Look
+              up {{ id }}</button>
+          </div>
+        </div>
+        <table class="uk-table uk-table-striped uk-table-hover uk-table-small" v-if="result.args">
+          <thead>
+            <tr>
+              <th class="uk-width-1-5">Arg</th>
+              <th class="uk-width-1-5">Function</th>
+              <th class="uk-width-3-5">Description</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr v-for="unit in result.args" :key="unit">
+              <td> {{ unit["arg"] }} </td>
+              <td> {{ unit["function"] }} </td>
+              <td> {{ unit["description"] }} </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </li>
+  </ul>
+
 </template>
 
 <style></style>
