@@ -28,7 +28,7 @@ const router = createRouter({
     }, {
       path: '/TurkishWordnet',
       name: 'TurkishWordnet',
-      component: () => import('../views/TurkishWordnet.vue'),
+      component: () => import('../views/TurkishWordNet.vue'),
     },
   ],
 })

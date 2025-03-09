@@ -16,7 +16,7 @@ import { reactive, ref } from "vue"
 import * as utils from "@/utils/nlp"
 import { scrollToTop } from "@/utils/scrollToTop"
 
-defineOptions({ meta: { language: "Turkish", toolkit: "Wordnet" } })
+defineOptions({ meta: { language: "Turkish", toolkit: "WordNet" } })
 
 const turkishWordNets = {
   1901: turkishWordNet1901,
