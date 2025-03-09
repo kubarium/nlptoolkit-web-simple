@@ -12,7 +12,7 @@ function getSynsetsWithWord(word, wordNet) {
   return result
 }
 function searchInWordnet(id, wordNet) {
-  return wordNet.find(entry => entry.id == id) || []
+  return wordNet.find(entry => entry.id == id) || null
 }
 function getFramesForSynSet(synset, frameNet) {
   let result = []
