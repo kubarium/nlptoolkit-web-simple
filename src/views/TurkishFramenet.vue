@@ -48,9 +48,9 @@ function findSynSetID(word) {
     <SearchForm @submit.prevent="findSynSetID(searchTerms.id)" v-model="searchTerms.id">Verb SynSet Id</SearchForm>
   </header>
   <template v-if="search">
-    <SearchResultsCounter :searchResults="searchResults" :for="search" />
+    <SearchResultsCounter :searchResults="searchResults.length" :for="search" />
   </template>
-  <ul uk-accordion class="framenet-verb">
+  <ul uk-accordion>
     <li v-for="(result, index) in searchResults" :key="index">
       <a class="uk-accordion-title" href>{{ index + 1 }}. {{ result.frame }}</a>
       <div class="uk-accordion-content">
