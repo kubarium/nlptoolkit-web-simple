@@ -25,11 +25,15 @@ const router = createRouter({
     }, {
       path: '/TurkishWordNet',
       name: 'TurkishWordNet',
-      component: () => import('../views/TurkishWordnet.vue'),
+      component: () => import('../views/TurkishWordNet.vue'),
     }, {
       path: '/TurkishSentiNet',
       name: 'TurkishSentiNet',
       component: () => import('../views/TurkishSentiNet.vue'),
+    }, {
+      path: '/TurkishDictionary',
+      name: 'TurkishDictionary',
+      component: () => import('../views/TurkishDictionary.vue'),
     },
   ],
 })
