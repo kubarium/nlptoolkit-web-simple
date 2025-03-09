@@ -50,15 +50,19 @@ function findSynSetID(id) {
     <h2 class="uk-h3 uk-text-muted">
       Sentiment for {{ search }} is {{ sentiment }}
     </h2>
-    <div></div>
-  </div>
-  <div class="uk-flex uk-flex-around uk-flex-middle uk-margin" uk-grid v-if="searchResult.length">
-    <div class="uk-text-danger uk-margin-xsmall-right uk-text-bold">-1.0</div>
-    <div class="uk-width-expand">
-      <form>
-        <input disabled class="uk-range" type="range" :value="sentimentScore" min="-1.0" max="1.0" step="0.001" />
-      </form>
+    <div class="uk-flex uk-flex-around uk-flex-middle uk-margin" uk-grid v-if="searchResult.length">
+      <div class="uk-text-danger uk-margin-xsmall-right uk-text-bold">-1.0</div>
+      <div class="uk-width-expand">
+        <form>
+          <input disabled class="uk-range" type="range" :value="sentimentScore" min="-1.0" max="1.0" step="0.001" />
+        </form>
+      </div>
+      <div class="uk-text-success uk-margin-xsmall-left uk-text-bold">1.0</div>
     </div>
-    <div class="uk-text-success uk-margin-xsmall-left uk-text-bold">1.0</div>
+  </div>
+  <div v-else class="uk-margin uk-text-center">
+    <h2 class="uk-h3 uk-text-muted">
+      No results for {{ search }}
+    </h2>
   </div>
 </template>
