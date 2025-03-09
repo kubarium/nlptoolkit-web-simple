@@ -42,7 +42,7 @@ function findSynSetID(word) {
 </script>
 
 <template>
-  <header class="uk-flex uk-flex-around uk-background-default" uk-sticky>
+  <header class="uk-flex uk-flex-around uk-background-default" uk-sticky uk-grid>
     <SearchForm @submit.prevent="findFrame(searchTerms.frame)" v-model="searchTerms.frame">Frame Name</SearchForm>
     <SearchForm @submit.prevent="findVerb(searchTerms.verb)" v-model="searchTerms.verb">Verb</SearchForm>
     <SearchForm @submit.prevent="findSynSetID(searchTerms.id)" v-model="searchTerms.id">Verb SynSet Id</SearchForm>
@@ -67,7 +67,7 @@ function findSynSetID(word) {
             <button class="uk-button uk-button-secondary uk-width-1-1 uk-height-1-1"
               @click="findFrame(result.frame)">Look
               up {{
-                result.frame }}</button>
+              result.frame }}</button>
           </div>
         </div>
         <h2 class="uk-h3 uk-text-muted">
