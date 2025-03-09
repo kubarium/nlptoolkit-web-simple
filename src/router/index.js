@@ -10,25 +10,26 @@ const router = createRouter({
       path: '/',
       name: 'home',
       component: Home,
-    },
-    {
+    }, {
       path: '/:pathMatch(.*)*',
       name: 'catch-all',
       component: Home,
-    },
-    {
+    }, {
       path: '/TurkishFrameNet',
       name: 'TurkishFrameNet',
       component: () => import('../views/TurkishFrameNet.vue'),
-    },
-    {
+    }, {
       path: '/TurkishPropBank',
       name: 'TurkishPropBank',
       component: () => import('../views/TurkishPropBank.vue'),
     }, {
-      path: '/TurkishWordnet',
-      name: 'TurkishWordnet',
-      component: () => import('../views/TurkishWordNet.vue'),
+      path: '/TurkishWordNet',
+      name: 'TurkishWordNet',
+      component: () => import('../views/TurkishWordnet.vue'),
+    }, {
+      path: '/TurkishSentiNet',
+      name: 'TurkishSentiNet',
+      component: () => import('../views/TurkishSentiNet.vue'),
     },
   ],
 })
