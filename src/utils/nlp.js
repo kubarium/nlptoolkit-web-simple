@@ -49,14 +49,16 @@ function getFramesForSynSets(synsets, frameNet) {
   return result
 }
 function getPropsForSynSets(synsets, propBank) {
-  let result = []
+  let result = {}
   for (let synset of synsets) {
     for (let i = 0; i < propBank.length; i++) {
       let frameSet = propBank[i];
       if (frameSet["id"] === synset["id"]) {
-        let args = frameSet["args"]
-        for (let arg of args) {
-          result.push({ "id": synset["id"], "definition": synset["definition"], "arg": arg["arg"], "function": arg["function"], "description": arg["description"] })
+        if (!result[frameSet["id"]]) {
+          result[frameSet["id"]] = []
+        }
+        result[frameSet["id"]] = {
+          definition: synset["definition"],args: frameSet["args"]
         }
       }
     }
