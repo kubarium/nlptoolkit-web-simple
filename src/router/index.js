@@ -25,6 +25,10 @@ const router = createRouter({
       path: '/TurkishPropBank',
       name: 'TurkishPropBank',
       component: () => import('../views/TurkishPropBank.vue'),
+    }, {
+      path: '/TurkishWordnet',
+      name: 'TurkishWordnet',
+      component: () => import('../views/TurkishWordnet.vue'),
     },
   ],
 })
