@@ -32,10 +32,10 @@ function findVerb(word) {
   searchResults.value = utils.getFramesForSynSets(utils.getSynsetsWithWord(word, turkishWordNet), turkishFrameNet)
   scrollToTop()
 }
-function findSynSetID(word) {
-  search.value = word
+function findSynSetID(id) {
+  search.value = id
   searchTerms.id = ""
-  searchResults.value = utils.getFramesForSynSet(word, turkishFrameNet)
+  searchResults.value = utils.getFramesForSynSet(id, turkishFrameNet)
   scrollToTop()
 }
 
@@ -60,14 +60,14 @@ function findSynSetID(word) {
         </h2>
         <div uk-grid>
           <div class="uk-width-2-3">
-            <span class="uk-label uk-margin-xsmall-right" v-for="frame in result.frameElements" :key="frame">{{ frame
-              }}</span>
+            <span class="uk-label uk-margin-xsmall-right" v-for="frame in result.frameElements" :key="frame">
+              {{ frame }}
+            </span>
           </div>
           <div class="uk-width-1-3 uk-divider-vertical">
-            <button class="uk-button uk-button-secondary uk-width-1-1 uk-height-1-1"
-              @click="findFrame(result.frame)">Look
-              up {{
-              result.frame }}</button>
+            <button class="uk-button uk-button-secondary uk-width-1-1 uk-height-1-1" @click="findFrame(result.frame)">
+              Look up {{ result.frame }}
+            </button>
           </div>
         </div>
         <h2 class="uk-h3 uk-text-muted uk-margin-small">

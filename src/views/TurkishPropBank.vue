@@ -9,12 +9,10 @@ import { reactive, ref } from 'vue'
 
 defineOptions({ meta: { language: "Turkish", toolkit: "PropBank" } })
 const searchTerms = reactive({
-  frame: "", verb: "", id: ""
+  verb: "", id: ""
 })
 const search = ref("")
 const searchResults = ref()
-
-
 
 function findVerb(word) {
   search.value = word
@@ -26,7 +24,7 @@ function findSynSetID(id) {
   search.value = id
   searchTerms.id = ""
   let synSet = turkishPropbank.find(entry => entry.id == id)
-  if(synSet) {
+  if (synSet) {
     searchResults.value = {
       [id]: {
         definition: "",
@@ -59,9 +57,9 @@ function findSynSetID(id) {
             </h2>
           </div>
           <div class="uk-width-1-3 uk-divider-vertical">
-            <button class="uk-button uk-button-secondary uk-width-1-1 uk-height-1-1"
-              @click="findSynSetID(id)">Look
-              up {{ id }}</button>
+            <button class="uk-button uk-button-secondary uk-width-1-1 uk-height-1-1" @click="findSynSetID(id)">
+              Look up {{ id }}
+            </button>
           </div>
         </div>
         <table class="uk-table uk-table-striped uk-table-hover uk-table-small" v-if="result.args">
@@ -83,7 +81,4 @@ function findSynSetID(id) {
       </div>
     </li>
   </ul>
-
 </template>
-
-<style></style>
