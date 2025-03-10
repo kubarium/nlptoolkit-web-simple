@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute()
 const isRouteActive = (targetPath) => {
-  return route.path === targetPath;
+  return route.path === targetPath.replaceAll(" ","");
 };
 const menu = {
   Turkish: {
