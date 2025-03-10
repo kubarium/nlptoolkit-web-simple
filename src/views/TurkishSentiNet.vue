@@ -9,35 +9,37 @@ const searchTerms = reactive({
   word: "", id: ""
 })
 const search = ref("")
-let searchResult = ref([])
+const searchResult = ref([])
 
 const sentimentScore = ref(0)
 const sentiment = ref("")
 
 watch(searchResult, (newResult, oldResult) => {
-  if (searchResult.value[0]?.pscore > 0) {
-    sentimentScore.value = newResult[0]?.pscore
-    sentiment.value = `positive with score ${newResult[0]?.pscore}`
+  if (!searchResult.value) return
+
+  if (searchResult.value[0] > 0) {
+    sentimentScore.value = newResult[0]
+    sentiment.value = `Sentiment for <i>${search.value}</i> is <strong class="uk-text-success">positive</strong> with score ${newResult[0]}`
   }
-  else if (searchResult.value[0]?.nscore > 0) {
-    sentimentScore.value = -searchResult.value[0]?.nscore
-    sentiment.value = `negative with score -${newResult[0]?.nscore}`
+  else if (searchResult.value[1] > 0) {
+    sentimentScore.value = -searchResult.value[1]
+    sentiment.value = `Sentiment for <i>${search.value}</i> is <strong class="uk-text-danger">negative</strong> with score -${newResult[1]}`
   }
   else {
     sentimentScore.value = 0
-    sentiment.value = `neutral`
+    sentiment.value = `Sentiment for ${search.value} is neutral`
   }
 }, { deep: true })
 
 function findWord(word) {
   search.value = word
   searchTerms.word = ""
-  searchResult.value = turkishSentiLiteralNet.filter(sentiNetObject => sentiNetObject["word"] === word) || null
+  searchResult.value = turkishSentiLiteralNet[word] || []
 }
 function findSynSetID(id) {
   search.value = id
   searchTerms.id = ""
-  searchResult.value = turkishSentiNet.filter(sentiNetObject => sentiNetObject["id"] === id) || null
+  searchResult.value = turkishSentiNet[id] || []
 }
 </script>
 
@@ -47,9 +49,7 @@ function findSynSetID(id) {
     <SearchForm @submit.prevent="findSynSetID(searchTerms.id)" v-model="searchTerms.id">SynSet Id</SearchForm>
   </header>
   <div v-if="searchResult.length" class="uk-margin uk-text-center">
-    <h2 class="uk-h3 uk-text-muted">
-      Sentiment for {{ search }} is {{ sentiment }}
-    </h2>
+    <h2 class="uk-h3 uk-text-muted" v-html="sentiment"> </h2>
     <div class="uk-flex uk-flex-around uk-flex-middle uk-margin" uk-grid v-if="searchResult.length">
       <div class="uk-text-danger uk-margin-xsmall-right uk-text-bold">-1.0</div>
       <div class="uk-width-expand">
@@ -60,7 +60,7 @@ function findSynSetID(id) {
       <div class="uk-text-success uk-margin-xsmall-left uk-text-bold">1.0</div>
     </div>
   </div>
-  <div v-else class="uk-margin uk-text-center">
+  <div v-if="search && searchResult.length == 0" class="uk-margin uk-text-center">
     <h2 class="uk-h3 uk-text-muted">
       No results for {{ search }}
     </h2>
