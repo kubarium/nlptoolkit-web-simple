@@ -3,7 +3,7 @@ import { useRoute } from 'vue-router';
 
 const route = useRoute()
 const isRouteActive = (targetPath) => {
-  return route.path === targetPath.replaceAll(" ","");
+  return route.path === targetPath.replaceAll(" ", "");
 };
 const menu = {
   Turkish: {
@@ -29,7 +29,7 @@ const menu = {
           <ul class="uk-navbar-nav">
             <li>
               <a>Turkish <span uk-drop-parent-icon></span></a>
-              <div class="uk-navbar-dropdown uk-navbar-dropdown-width-2">
+              <div class="uk-navbar-dropdown uk-navbar-dropdown-width-3">
                 <div class="uk-drop-grid uk-child-width-1-2" uk-grid>
                   <div>
                     <ul class="uk-nav uk-navbar-dropdown-nav">
