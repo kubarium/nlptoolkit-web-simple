@@ -38,18 +38,26 @@ const router = createRouter({
       path: '/TurkishMorphologicalLexicon',
       name: 'TurkishMorphologicalLexicon',
       component: () => import('../views/TurkishMorphologicalLexicon.vue'),
-    },{
+    }, {
       path: '/TurkishSpellChecker',
       name: 'TurkishSpellChecker',
       component: () => import('../views/TurkishSpellChecker.vue'),
-    },{
+    }, {
       path: '/TurkishMorphologicalAnalysis',
       name: 'TurkishMorphologicalAnalysis',
       component: () => import('../views/TurkishMorphologicalAnalysis.vue'),
-    },{
+    }, {
       path: '/TurkishMorphologicalDisambiguation',
       name: 'TurkishMorphologicalDisambiguation',
       component: () => import('../views/TurkishMorphologicalDisambiguation.vue'),
+    }, {
+      path: '/TurkishAsciifier',
+      name: 'TurkishAsciifier',
+      component: () => import('../views/TurkishAsciifier.vue'),
+    }, {
+      path: '/TurkishDeasciifier',
+      name: 'TurkishDeasciifier',
+      component: () => import('../views/TurkishDeasciifier.vue'),
     },
   ],
 })
