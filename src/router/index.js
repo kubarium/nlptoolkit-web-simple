@@ -46,6 +46,10 @@ const router = createRouter({
       path: '/TurkishMorphologicalAnalysis',
       name: 'TurkishMorphologicalAnalysis',
       component: () => import('../views/TurkishMorphologicalAnalysis.vue'),
+    },{
+      path: '/TurkishMorphologicalDisambiguation',
+      name: 'TurkishMorphologicalDisambiguation',
+      component: () => import('../views/TurkishMorphologicalDisambiguation.vue'),
     },
   ],
 })
