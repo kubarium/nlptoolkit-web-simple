@@ -42,6 +42,10 @@ const router = createRouter({
       path: '/TurkishSpellChecker',
       name: 'TurkishSpellChecker',
       component: () => import('../views/TurkishSpellChecker.vue'),
+    },{
+      path: '/TurkishMorphologicalAnalysis',
+      name: 'TurkishMorphologicalAnalysis',
+      component: () => import('../views/TurkishMorphologicalAnalysis.vue'),
     },
   ],
 })
