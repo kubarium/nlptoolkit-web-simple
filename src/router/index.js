@@ -34,6 +34,10 @@ const router = createRouter({
       path: '/TurkishDictionary',
       name: 'TurkishDictionary',
       component: () => import('../views/TurkishDictionary.vue'),
+    }, {
+      path: '/TurkishMorphologicalLexicon',
+      name: 'TurkishMorphologicalLexicon',
+      component: () => import('../views/TurkishMorphologicalLexicon.vue'),
     },
   ],
 })
