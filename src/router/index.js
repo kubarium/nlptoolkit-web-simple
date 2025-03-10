@@ -38,6 +38,10 @@ const router = createRouter({
       path: '/TurkishMorphologicalLexicon',
       name: 'TurkishMorphologicalLexicon',
       component: () => import('../views/TurkishMorphologicalLexicon.vue'),
+    },{
+      path: '/TurkishSpellChecker',
+      name: 'TurkishSpellChecker',
+      component: () => import('../views/TurkishSpellChecker.vue'),
     },
   ],
 })
