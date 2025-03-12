@@ -82,6 +82,10 @@ const router = createRouter({
       path: '/TurkishNamedEntityRecognition',
       name: 'TurkishNamedEntityRecognition',
       component: () => import('../views/TurkishNamedEntityRecognition.vue'),
+    },{
+      path: '/EnglishWordNet',
+      name: 'EnglishWordNet',
+      component: () => import('../views/EnglishWordNet.vue'),
     },
   ],
 })
