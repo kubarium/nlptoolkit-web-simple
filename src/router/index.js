@@ -78,6 +78,10 @@ const router = createRouter({
       path: '/TurkishSentimentAnalysis',
       name: 'TurkishSentimentAnalysis',
       component: () => import('../views/TurkishSentimentAnalysis.vue'),
+    },{
+      path: '/TurkishNamedEntityRecognition',
+      name: 'TurkishNamedEntityRecognition',
+      component: () => import('../views/TurkishNamedEntityRecognition.vue'),
     },
   ],
 })
