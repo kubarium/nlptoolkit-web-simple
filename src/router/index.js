@@ -74,6 +74,10 @@ const router = createRouter({
       path: '/TurkishWordSenseDisambiguation',
       name: 'TurkishWordSenseDisambiguation',
       component: () => import('../views/TurkishWordSenseDisambiguation.vue'),
+    },{
+      path: '/TurkishSentimentAnalysis',
+      name: 'TurkishSentimentAnalysis',
+      component: () => import('../views/TurkishSentimentAnalysis.vue'),
     },
   ],
 })
