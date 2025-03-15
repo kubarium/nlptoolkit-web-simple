@@ -1,0 +1,68 @@
+<script setup>
+import SearchForm from '@/components/SearchForm.vue'
+import turkishSentiNet from "@/data/turkish/turkish-sentinet.json"
+import turkishSentiLiteralNet from "@/data/turkish/turkish-sentiliteralnet.json"
+import { reactive, ref, watch } from 'vue'
+
+defineOptions({ meta: { language: "Turkish", toolkit: "SentiNet" } })
+const searchTerms = reactive({
+  word: "", id: ""
+})
+const search = ref("")
+const searchResult = ref([])
+
+const sentimentScore = ref(0)
+const sentiment = ref("")
+
+watch(searchResult, (newResult, oldResult) => {
+  if (!searchResult.value) return
+
+  if (searchResult.value[0] > 0) {
+    sentimentScore.value = newResult[0]
+    sentiment.value = `Sentiment for <i>${search.value}</i> is <strong class="uk-text-success">positive</strong> with score ${newResult[0]}`
+  }
+  else if (searchResult.value[1] > 0) {
+    sentimentScore.value = -searchResult.value[1]
+    sentiment.value = `Sentiment for <i>${search.value}</i> is <strong class="uk-text-danger">negative</strong> with score -${newResult[1]}`
+  }
+  else {
+    sentimentScore.value = 0
+    sentiment.value = `Sentiment for ${search.value} is neutral`
+  }
+}, { deep: true })
+
+function findWord(word) {
+  search.value = word
+  searchTerms.word = ""
+  searchResult.value = turkishSentiLiteralNet[word] || []
+}
+function findSynSetID(id) {
+  search.value = id
+  searchTerms.id = ""
+  searchResult.value = turkishSentiNet[id] || []
+}
+</script>
+
+<template>
+  <header class="uk-flex uk-flex-between uk-background-default" uk-sticky uk-grid>
+    <SearchForm @submit.prevent="findWord(searchTerms.word)" v-model="searchTerms.word">Word</SearchForm>
+    <SearchForm @submit.prevent="findSynSetID(searchTerms.id)" v-model="searchTerms.id">SynSet Id</SearchForm>
+  </header>
+  <div v-if="searchResult.length" class="uk-margin uk-text-center">
+    <h2 class="uk-h3 uk-text-muted" v-html="sentiment"> </h2>
+    <div class="uk-flex uk-flex-around uk-flex-middle uk-margin" uk-grid v-if="searchResult.length">
+      <div class="uk-text-danger uk-margin-xsmall-right uk-text-bold">-1.0</div>
+      <div class="uk-width-expand">
+        <form>
+          <input disabled class="uk-range" type="range" :value="sentimentScore" min="-1.0" max="1.0" step="0.001" />
+        </form>
+      </div>
+      <div class="uk-text-success uk-margin-xsmall-left uk-text-bold">1.0</div>
+    </div>
+  </div>
+  <div v-if="search && searchResult.length == 0" class="uk-margin uk-text-center">
+    <h2 class="uk-h3 uk-text-muted">
+      No results for {{ search }}
+    </h2>
+  </div>
+</template>
