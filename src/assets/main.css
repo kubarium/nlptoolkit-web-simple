@@ -1,9 +1,0 @@
-fieldset {
-  border: 1px groove lightsteelblue;
-  border-radius: 3px;
-  font-weight: bold;
-}
-
-.uk-navbar-dropdown {
-  top: 65px !important;
-}
