@@ -70,26 +70,36 @@ const router = createRouter({
       path: '/TurkishDeasciifier',
       name: 'TurkishDeasciifier',
       component: () => import('../views/TurkishDeasciifier.vue'),
-    },{
+    },
+    {
       path: '/TurkishWordSenseDisambiguation',
       name: 'TurkishWordSenseDisambiguation',
       component: () => import('../views/TurkishWordSenseDisambiguation.vue'),
-    },{
+    },
+    {
       path: '/TurkishSentimentAnalysis',
       name: 'TurkishSentimentAnalysis',
       component: () => import('../views/TurkishSentimentAnalysis.vue'),
-    },{
+    },
+    {
       path: '/TurkishNamedEntityRecognition',
       name: 'TurkishNamedEntityRecognition',
       component: () => import('../views/TurkishNamedEntityRecognition.vue'),
-    },{
+    },
+    {
       path: '/EnglishWordNet',
       name: 'EnglishWordNet',
       component: () => import('../views/EnglishWordNet.vue'),
-    },{
+    },
+    {
       path: '/EnglishPropBank',
       name: 'EnglishPropBank',
       component: () => import('../views/EnglishPropBank.vue'),
+    },
+    {
+      path: '/EnglishPosTagger',
+      name: 'EnglishPosTagger',
+      component: () => import('../views/EnglishPosTagger.vue'),
     },
   ],
 })
@@ -100,7 +110,6 @@ router.afterEach((to, from) => {
   if (component && component.meta) {
     to.meta = component.meta
   }
-
 })
 
 export default router
