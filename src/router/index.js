@@ -86,6 +86,10 @@ const router = createRouter({
       path: '/EnglishWordNet',
       name: 'EnglishWordNet',
       component: () => import('../views/EnglishWordNet.vue'),
+    },{
+      path: '/EnglishPropBank',
+      name: 'EnglishPropBank',
+      component: () => import('../views/EnglishPropBank.vue'),
     },
   ],
 })
