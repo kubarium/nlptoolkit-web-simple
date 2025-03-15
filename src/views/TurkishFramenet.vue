@@ -19,11 +19,14 @@ function findFrame(frame) {
   search.value = frame
   searchTerms.frame = ""
   const entry = turkishFrameNet.find(entry => entry.frame == frame)
+  if(entry){
   searchResults.value = [{
     frame,
     lexicalUnits: entry?.lexicalUnits,
     frameElements: entry?.frameElements
-  }]
+    }]
+  }
+  else searchResults.value = []
   scrollToTop()
 }
 function findVerb(word) {
