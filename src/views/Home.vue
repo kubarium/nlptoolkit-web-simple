@@ -95,6 +95,5 @@
       project.</li>
     <li>Implement unit tests to ensure the reliability and stability of the application.</li>
     <li>Improve accessibility to ensure the application is usable by people with disabilities.</li>
-    <li>Refactor the codebase to render screens for devices other than desktop monitors.</li>
   </ul>
 </template>
