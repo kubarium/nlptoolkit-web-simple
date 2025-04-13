@@ -4,7 +4,7 @@ const props = defineProps(["buttonLabel"])
 </script>
 
 <template>
-  <form class="uk-width-expand" uk-margin>
+  <form class="uk-width-expand@s" uk-margin>
     <fieldset class="uk-flex">
       <legend>
         <slot></slot>
