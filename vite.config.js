@@ -13,5 +13,5 @@ export default defineConfig({
     },
   },
   build: {},
-  base: '/nlptoolkit-web-simple/',
+  // base: '/nlptoolkit-web-simple/',
 })
