@@ -49,7 +49,7 @@ function findSynSetID(id) {
     <SearchForm @submit.prevent="findSynSetID(searchTerms.id)" v-model="searchTerms.id">SynSet Id</SearchForm>
   </header>
   <div v-if="searchResult.length" class="uk-margin uk-text-center">
-    <h2 class="uk-h3 uk-text-muted" v-html="sentiment"> </h2>
+    <h2 class="uk-h3 uk-text-muted" v-html="sentiment"></h2>
     <div class="uk-flex uk-flex-around uk-flex-middle uk-margin" uk-grid v-if="searchResult.length">
       <div class="uk-text-danger uk-margin-xsmall-right uk-text-bold">-1.0</div>
       <div class="uk-width-expand">
