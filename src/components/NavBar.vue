@@ -18,7 +18,7 @@ const menu = {
 </script>
 <template>
   <header class="uk-container uk-padding-small uk-flex uk-flex-between uk-flex-middle">
-    <router-link class="uk-logo" to="/">NLP Toolkit</router-link>
+    <router-link class="uk-text-emphasi uk-link-reset " to="/">NLP Toolkit</router-link>
     <ul class="uk-breadcrumb uk-margin-remove" aria-label="Breadcrumb" v-if="route.meta.language">
       <li><span id="language">{{ route.meta.language }}</span></li>
       <li><span id="toolkit">{{ route.meta.toolkit }}</span></li>
