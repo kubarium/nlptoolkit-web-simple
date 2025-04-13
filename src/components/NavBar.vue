@@ -18,10 +18,10 @@ const menu = {
 </script>
 <template>
   <header class="uk-container uk-padding-small uk-flex uk-flex-between uk-flex-middle">
-    <router-link class="uk-text-emphasi uk-link-reset " to="/">NLP Toolkit</router-link>
-    <ul class="uk-breadcrumb uk-margin-remove" aria-label="Breadcrumb" v-if="route.meta.language">
-      <li><span id="language">{{ route.meta.language }}</span></li>
-      <li><span id="toolkit">{{ route.meta.toolkit }}</span></li>
+    <router-link class="uk-link-reset " to="/">NLP Toolkit</router-link>
+    <ul class="uk-breadcrumb uk-margin-remove uk-visible@s" aria-label="Breadcrumb" v-if="route.meta.language">
+      <li><span>{{ route.meta.language }}</span></li>
+      <li><span>{{ route.meta.toolkit }}</span></li>
     </ul>
     <nav class="uk-navbar-container uk-navbar-transparent uk-padding-remove uk-margin-remove">
       <div class="uk-container">
@@ -90,4 +90,10 @@ const menu = {
       </div>
     </nav>
   </header>
+  <div class="uk-container uk-padding uk-padding-remove-top uk-hidden@s uk-text-center">
+    <ul class="uk-breadcrumb uk-margin-remove" aria-label="Breadcrumb" v-if="route.meta.language">
+      <li><span class="uk-text-default">{{ route.meta.language }}</span></li>
+      <li><span class="uk-text-default">{{ route.meta.toolkit }}</span></li>
+    </ul>
+  </div>
 </template>
