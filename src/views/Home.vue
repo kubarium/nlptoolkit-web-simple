@@ -2,18 +2,21 @@
 <template>
   <h1 class="uk-heading-divider">Motivation</h1>
   <p>The original project, called <a href="https://starlangsoftware.github.io/nlptoolkit-web-simple/"
-      target="_blank">NLP Toolkit</a>, was a great idea, but it did not have the greatest user experience, nor was it easy for a
+      target="_blank">NLP Toolkit</a>, was a great idea, but it did not have the greatest user experience, nor was it
+    easy for a
     developer to maintain. The codebase was full of duplicate efforts. The UI, most of all, could have used a thick coat
     of paint.</p>
   <div uk-grid class="uk-grid-large">
-    <div class="uk-width-2-5">
+    <div class="uk-width-2-5@s">
       <h2>Existing Material</h2>
-      <p>The toolkit is designed to help you analyze and understand the structure of natural language. It provides a set
-        of tools for tokenization, lemmatization, part-of-speech tagging, and dependency parsing. The study is done in
+      <p>The toolkit is designed to help you analyze and understand the
+        structure of natural
+        language. It provides a set
+        of tools for part-of-speech tagging, tokenization, lemmatization, and dependency parsing. The study is done in
         two languages, Turkish and English. Most pages consist of a few search fields to look up information in relevant
         datasets. Then, the results are displayed in a table.</p>
     </div>
-    <div class="uk-width-3-5">
+    <div class="uk-width-3-5@s ">
       <h2>Suggested Improvements</h2>
       <p>The most important thing is to make the UI more user-friendly. The search fields should be more intuitive and
         easier to use. Here are other suggested improvements:</p>
@@ -26,10 +29,10 @@
   </div>
   <h2 class="uk-heading-divider">Method</h2>
   <div uk-grid>
-    <div class="uk-width-1-4">
+    <div class="uk-width-1-4@s">
       <p>In order to improve the project, we have taken many interim steps:</p>
-      <div uk-sticky>
-        <ul class="uk-nav uk-nav-default tm-nav" uk-scrollspy-nav="closest: li; scroll: true; offset: 20">
+      <div uk-sticky class="uk-background-default">
+        <ul class="uk-nav uk-nav-default tm-nav" uk-scrollspy-nav="closest: li; scroll: true; offset: 40">
           <li class="uk-active"><a href="#design">Design</a></li>
           <li><a href="#framework">Framework</a></li>
           <li><a href="#implementation">Implementation</a></li>
@@ -40,20 +43,15 @@
     <div class="uk-width-expand">
       <h3 id="design">Design</h3>
       <p>The <a href="https://getuikit.com/" target="_blank"> UIKit</a> was chosen for the visual uplifting part of the
-        project because it
-        is a simple and easy-to-use UI
-        framework.
+        project because it is a simple and easy-to-use UI framework.
         In fact, the earliest iteration of modernization started off with just including the UIKit over the existing
         codebase. First order of business was to construct a navigation and give the homepage a more welcoming look.
       </p>
       <p>Next was to change how the search results looked in tables. However, it became clear that sprinkling UIKit's
-        parts over the original code wasn't going to improve
-        much
-        in terms of developer experience. This was due to the fact that the original codebase had visual and code
-        concerns
+        parts over the original code wasn't going to improve much in terms of developer experience. This was due to the
+        fact that the original codebase had visual and code concerns
         mixed all together. Function calls that should return just the data were returning HTML as well. Thus, while
-        keeping UIKit still
-        an option, we moved on to selecting a
+        keeping UIKit still an option, we moved on to selecting a
         framework.</p>
       <h3 id="framework">Framework</h3>
       <p>The next decision was to choose a framework for the project. The most popular frameworks are React, Vue, and
@@ -78,7 +76,8 @@
         array of objects, each object representing a word, the new structure would be a single object with the word as
         the
         key and the data as the value:</p>
-      <code>[...,{"word": "Aaliyah", "ner": "PERSON"},...]</code> became <code>{...,"Aaliyah": "PERSON",...}</code>
+      <pre> [..., {"word": "Aaliyah", "ner": "PERSON"}, ...]</pre> became
+      <pre>{..., "Aaliyah": "PERSON", ...}</pre>
       <p>As a result, we have managed to reduce the file size by 50% on a lot of files. Overall, we have saved 50 MB.
       </p>
     </div>
