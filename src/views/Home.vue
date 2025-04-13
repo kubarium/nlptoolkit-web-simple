@@ -2,7 +2,7 @@
 <template>
   <h1 class="uk-heading-divider">Motivation</h1>
   <p>The original project, called <a href="https://starlangsoftware.github.io/nlptoolkit-web-simple/"
-      target="_blank">NLP Toolkit</a>, was a great idea, but it did not have the greatest user, nor was it easy for a
+      target="_blank">NLP Toolkit</a>, was a great idea, but it did not have the greatest user experience, nor was it easy for a
     developer to maintain. The codebase was full of duplicate efforts. The UI, most of all, could have used a thick coat
     of paint.</p>
   <div uk-grid class="uk-grid-large">
@@ -27,7 +27,7 @@
   <h2 class="uk-heading-divider">Method</h2>
   <div uk-grid>
     <div class="uk-width-1-4">
-      <p>In order to improve the project, we have taken many interim steps to get to this point.</p>
+      <p>In order to improve the project, we have taken many interim steps:</p>
       <div uk-sticky>
         <ul class="uk-nav uk-nav-default tm-nav" uk-scrollspy-nav="closest: li; scroll: true; offset: 20">
           <li class="uk-active"><a href="#design">Design</a></li>
