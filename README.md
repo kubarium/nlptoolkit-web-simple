@@ -48,11 +48,11 @@ The original project had a large number of data files. These files, typically a 
 
 Furthermore, in some files, the data structure was completely altered. For example, if a dataset consisted of an array of objects, each object representing a word:
 
-```json
+```
 [..., {"word": "Aaliyah", "ner": "PERSON"}, ...]
 ```
 became
-```json
+```
 {..., "Aaliyah": "PERSON", ...}
 ```
 As a result, we have managed to reduce the file size by 50% on a lot of files. Overall, we have saved 50 MB.
