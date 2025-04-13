@@ -22,7 +22,7 @@ function analyze(sentence) {
 <template>
   <header class="uk-flex uk-flex-between uk-background-default" uk-sticky uk-grid>
     <SearchForm @submit.prevent="analyze(searchTerms.sentence)" v-model="searchTerms.sentence"
-      button-label="Morphologically Analyze">Sentence
+      button-label="Analyze">Sentence
     </SearchForm>
   </header>
   <div class="uk-margin uk-text-center uk-h3" v-if="search">
